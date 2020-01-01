@@ -4,7 +4,11 @@ import App from 'components/App';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
 
-const shallowComponent = shallow(<App />);
+let shallowComponent;
+
+beforeEach(() => {
+  shallowComponent = shallow(<App />);
+});
 
 it('shows a comment box', () => {
   expect(shallowComponent.find(CommentBox).length).toEqual(1);
