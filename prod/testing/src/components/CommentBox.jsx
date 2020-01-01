@@ -9,13 +9,31 @@ export default class CommentBox extends Component {
     };
   }
 
+  handleChange = e => {
+    const { value } = e.target;
+
+    this.setState({
+      comment: value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    // TODO - Call an action creator
+    // And save the comment
+    this.setState({
+      comment: ''
+    });
+  };
+
   render() {
     const { comment } = this.state;
 
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <h4>Add a Comment</h4>
-        <textarea value={comment} />
+        <textarea onChange={this.handleChange} value={comment} />
         <div>
           <button>Submit Comment</button>
         </div>
