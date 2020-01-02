@@ -3,6 +3,11 @@ import { mount } from 'enzyme';
 import CommentBox from 'components/CommentBox';
 
 let fullDOMComponent;
+const mockEventObj = {
+  target: {
+    value: 'new comment'
+  }
+};
 
 beforeEach(() => {
   fullDOMComponent = mount(<CommentBox />);
@@ -18,11 +23,6 @@ it('has a text area and a button', () => {
 });
 
 it('has a text area that users can type in', () => {
-  const mockEventObj = {
-    target: {
-      value: 'new comment'
-    }
-  };
   fullDOMComponent
     .find('textarea')
     .simulate('change', mockEventObj)
@@ -31,4 +31,18 @@ it('has a text area that users can type in', () => {
   expect(fullDOMComponent.find('textarea').prop('value')).toEqual(
     'new comment'
   );
+});
+
+it('when form is submitted, text area gets emptied', () => {
+  fullDOMComponent
+    .find('textarea')
+    .simulate('change', mockEventObj)
+    .update();
+
+  fullDOMComponent
+    .find('form')
+    .simulate('submit')
+    .update();
+
+  expect(fullDOMComponent.find('textarea').prop('value')).toEqual('');
 });
