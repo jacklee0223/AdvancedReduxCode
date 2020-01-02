@@ -24,7 +24,7 @@ afterEach(() => {
 
 it('has a text area and a button', () => {
   expect(fullDOMComponent.find('textarea').length).toEqual(1);
-  expect(fullDOMComponent.find('button').length).toEqual(1);
+  expect(fullDOMComponent.find('button').length).toEqual(2);
 });
 
 describe('the text area', () => {
