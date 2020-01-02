@@ -1,0 +1,17 @@
+import { saveComment } from 'actions';
+import { SAVE_COMMENT } from 'actions/types';
+
+describe('saveComment', () => {
+  it('has the correct type', () => {
+    const action = saveComment();
+
+    expect(action.type).toEqual(SAVE_COMMENT);
+  });
+
+  it('has the correct payload', () => {
+    const payloadString = 'New Comment';
+    const action = saveComment(payloadString);
+
+    expect(action.payload).toEqual(payloadString);
+  });
+});
