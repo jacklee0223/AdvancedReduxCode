@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import Root from 'Root';
 import CommentBox from 'components/CommentBox';
 
 let fullDOMComponent;
@@ -10,7 +11,11 @@ const mockEventObj = {
 };
 
 beforeEach(() => {
-  fullDOMComponent = mount(<CommentBox />);
+  fullDOMComponent = mount(
+    <Root>
+      <CommentBox />
+    </Root>
+  );
 });
 
 afterEach(() => {
