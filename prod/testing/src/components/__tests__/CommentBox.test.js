@@ -9,8 +9,6 @@ beforeEach(() => {
 });
 
 it('has a text area and a button', () => {
-  const fullDOMComponent = mount(<CommentBox />);
-
   expect(fullDOMComponent.find('textarea').length).toEqual(1);
   expect(fullDOMComponent.find('button').length).toEqual(1);
 });
