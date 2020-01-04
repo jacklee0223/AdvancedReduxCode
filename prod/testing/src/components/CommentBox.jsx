@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+import requireAuth from 'components/requireAuth';
 
 class CommentBox extends Component {
   constructor(props) {
@@ -9,22 +10,6 @@ class CommentBox extends Component {
     this.state = {
       comment: ''
     };
-  }
-
-  componentDidMount() {
-    this.shouldNavigateAway();
-  }
-
-  componentDidUpdate() {
-    this.shouldNavigateAway();
-  }
-
-  shouldNavigateAway() {
-    const { auth } = this.props;
-
-    if (!auth) {
-      console.log('need to leave');
-    }
   }
 
   handleChange = e => {
@@ -40,9 +25,12 @@ class CommentBox extends Component {
     e.preventDefault();
 
     saveComment(this.state.comment);
-    this.setState({
-      comment: ''
-    });
+    this.setState(
+      {
+        comment: ''
+      },
+      () => this.props.history.push('/')
+    );
   };
 
   render() {
@@ -65,8 +53,4 @@ class CommentBox extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { auth: state.auth };
-}
-
-export default connect(mapStateToProps, actions)(CommentBox);
+export default connect(null, actions)(requireAuth(CommentBox));
