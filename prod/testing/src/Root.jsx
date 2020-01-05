@@ -7,13 +7,13 @@ import App from './components/App';
 // import reduxPromise from 'redux-promise';
 import async from 'middlewares/async';
 import logger from 'redux-logger';
+import stateValidator from 'middlewares/stateValidator';
 
 export default ({ children, initialState = {} }) => {
-  const middleware = [async, logger];
   const store = createStore(
     reducers,
     initialState,
-    applyMiddleware(...middleware)
+    applyMiddleware(async, stateValidator, logger)
   );
 
   return <Provider store={store}>{children}</Provider>;
