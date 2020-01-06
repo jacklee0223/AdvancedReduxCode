@@ -6,13 +6,17 @@ import Root from 'Root';
 import App from 'components/App';
 import Welcome from 'components/Welcome';
 import Signup from 'components/auth/Signup';
+import Signout from 'components/auth/Signout';
+import Feature from 'components/Feature';
 
 ReactDOM.render(
   <Root>
     <BrowserRouter>
       <App>
         <Route path="/" exact component={Welcome} />
-        <Route path="/signup" exact component={Signup} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/signout" component={Signout} />
+        <Route path="/feature" component={Feature} />
       </App>
     </BrowserRouter>
   </Root>,

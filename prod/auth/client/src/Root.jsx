@@ -7,7 +7,10 @@ import App from './components/App';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-export default ({ children, initialState = {} }) => {
+export default ({
+  children,
+  initialState = { auth: { authenticated: localStorage.getItem('token') } }
+}) => {
   const store = createStore(
     reducers,
     initialState,

@@ -4,15 +4,19 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import authReducer from 'reducers/auth';
 import * as actions from 'actions';
+import { statement } from '@babel/template';
 
 class Signup extends Component {
   onSubmit = formProps => {
-    this.props.signup(formProps);
+    const { signup, history } = this.props;
+    signup(formProps, () => {
+      history.push('/feature');
+    });
   };
 
   render() {
     // handleSubmit comes from reduxForm
-    const { handleSubmit } = this.props;
+    const { handleSubmit, errorMessage } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -34,17 +38,20 @@ class Signup extends Component {
             autoComplete="none"
           />
         </fieldset>
+        <div>{errorMessage}</div>
         <button>Sign Up</button>
       </form>
     );
   }
 }
 
-// const mapStateToProps = {
-//   auth: authReducer
-// };
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.auth.errorMessage
+  };
+}
 
 export default compose(
-  connect(null, actions),
+  connect(mapStateToProps, actions),
   reduxForm({ form: 'singup' })
 )(Signup);
